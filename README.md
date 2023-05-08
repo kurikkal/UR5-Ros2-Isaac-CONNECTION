@@ -3,8 +3,17 @@ Documentation for the connection between ur5 &lt;-> ros2 &lt;-> Isaac Sim
 
 
 
-## Step 1
-Move the 'fastdds.xml' file also located at the root of the ros2_workspace folder in Isaac Sim folder to '~/.ros/'
+## Install necessary packages
+
+The following commands should install all necessary ROS2 Packages needed.
+
+```
+sudo apt install ros-humble-ur-*
+sudo apt install ros-humble-ros2-control
+sudo apt install ros-humble-ros2-controllers
+
+```
+
 
 ## Step 2
 Open the terminal and Run:
