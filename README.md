@@ -129,3 +129,6 @@ To subscribe to joint_states of the real UR5 and articulate the simulated versio
 Launch Isaac Sim following the steps in above section.
 Load the UR5.usd
 Open action graph
+Add the nodes as shown in the image to the graph
+![image](https://user-images.githubusercontent.com/72142589/236913790-c8f173ed-1194-40ae-bf2e-2947d536bbe4.png)
+
