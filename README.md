@@ -273,3 +273,7 @@ Now run the Custom ROS2 Package
 
 ## Start Simulation
 Move the robot in the Isaac Sim, the real robot should move accordingly.
+
+# Data from/to UR5 to/from Isaac- Control with feedback.
+
+
