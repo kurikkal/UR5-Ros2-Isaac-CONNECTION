@@ -124,11 +124,43 @@ Open action graph. Search for ROS2 Context and drag it into the empty graph. Typ
 
 # Data from UR5 to Isaac
 
+## Action Graph
+
 To subscribe to joint_states of the real UR5 and articulate the simulated version in Isaac Sim. Follow the below steps.
 
 Launch Isaac Sim following the steps in above section.
 Load the UR5.usd
 Open action graph
-Add the nodes as shown in the image to the graph
+Add the nodes as shown in the image to the graph and connect accordingly.
 ![image](https://user-images.githubusercontent.com/72142589/236913790-c8f173ed-1194-40ae-bf2e-2947d536bbe4.png)
+
+Enter Domain Id:99 in Ros2 Context node
+
+Enter Target: /World/UR5 and uncheck UsePath in Articulation Controller.
+
+Enter topic : joint_states
+
+## Launch the UR Control
+In the terminal in the above mentioned section (ROS2- Isaac Sim Connection/Step 2)
+Source ROS2
+Run:
+
+```
+ros2 launch ur_robot_driver ur_control.launch.py ur_type:=ur5 robot_ip:=192.168.1.102 launch_rviz:=true
+```
+
+Rviz window will pop up.
+
+Open another terminal, run all the commands mentioned in 'Step 2' and source ROS2.
+Run:
+```
+ros2 topic list
+```
+
+A set of ROS2 topics will be shown. Ensure the topic  'joint_states' is running
+
+## Start Simulation
+Press the play button in Isaac Sim. The UR5 in isaac sim will move to the initial position of the real robot.
+
+Go to the the 'Move' tab in teach pendant and move the robot. The robot in Isaac Sim should move accordingly.
 
