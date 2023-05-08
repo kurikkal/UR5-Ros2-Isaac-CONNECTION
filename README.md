@@ -81,7 +81,11 @@ Run the command in ROS2 sourced terminal:
 ros2 launch ur_robot_driver ur_control.launch.py ur_type:=ur5 robot_ip:=192.168.1.102 launch_rviz:=true
 ```
 
-RViz will be launched with the robot depicting its current state. Try it with 'move it' to plan and execute path
+RViz will be launched with the robot depicting its current state.
+
+Press the play button in teach pendant to enable it to receive commands
+
+Try it with 'move it' to plan and execute path
 
 ```
 ros2 launch ur_moveit_config ur_moveit.launch.py ur_type:=ur5 launch_rviz:=true
@@ -117,3 +121,11 @@ Open action graph. Search for ROS2 Context and drag it into the empty graph. Typ
  
  ```
  Now the bridge connection is established.
+
+# Data from UR5 to Isaac
+
+To subscribe to joint_states of the real UR5 and articulate the simulated version in Isaac Sim. Follow the below steps.
+
+Launch Isaac Sim following the steps in above section.
+Load the UR5.usd
+Open action graph
