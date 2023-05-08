@@ -1,7 +1,7 @@
 # UR5-Ros2-Isaac-CONNECTION
 Documentation for the connection between ur5 &lt;-> ros2 &lt;-> Isaac Sim
 
-
+#UR5-ROS2 Connection
 
 ## Install necessary packages
 
@@ -77,3 +77,14 @@ robot_ip:=192.168.1.102 target_filename:="${HOME}/my_robot_calibration.yaml"
 ```
 
 ## Usage
+Run the command in ROS2 sourced terminal:
+
+```
+ros2 launch ur_robot_driver ur_control.launch.py ur_type:=ur5 robot_ip:=192.168.1.102 launch_rviz:=true
+```
+
+RViz will be launched with the robot depicting its current state. Try it with 'move it' to plan and execute path
+
+```
+ros2 launch ur_moveit_config ur_moveit.launch.py ur_type:=ur5 launch_rviz:=true
+```
