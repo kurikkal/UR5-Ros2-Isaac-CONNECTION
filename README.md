@@ -166,11 +166,13 @@ Go to the the 'Move' tab in teach pendant and move the robot. The robot in Isaac
 
 # Data from Isaac to UR5
 
+## ROS2 Control
+
 The method to control the robot using Isaac Sim is complex compared to the previous one. 
 We use the ROS2 Joint State Publisher node to publish the joint states of the UR5 in Isaac Sim. The real robot should subscribe to this data move accordingly.
 ros2_control is the framework that enables this operation.
 The ur_robot_driver uses the 'joint_trajectory_controller', 'scaled_joint_trajectory_controller', 'forward_velocity_controller', 'forward_position_controller'. We will use the forward_position_controller to control the positions of the joints. The data published from Isaac Sim and the data to be published to the forward_position_controller is of different format.
-So we will create a ROS2 Package to subscribe to Isaac Sim Published joint_state and publish as forward_position.
+So we will create a ROS2 Package to subscribe to Isaac Sim Published joint_state and publish as forward_position with the following source code.
 
 ```
 import rclpy
@@ -225,3 +227,5 @@ if __name__ == '__main__':
     main()
  
 ```
+
+## Action Graph
