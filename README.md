@@ -8,19 +8,26 @@ Documentation for the connection between ur5 &lt;-> ros2 &lt;-> Isaac Sim
 The following commands should install all necessary ROS2 Packages needed.
 
 ```
+sudo apt-get install ros-humble-ur-robot-driver
 sudo apt install ros-humble-ur-*
 sudo apt install ros-humble-ros2-control
 sudo apt install ros-humble-ros2-controllers
 
 ```
 
+## Install URCap on teach pendant
+For using the ur_robot_driver with a real robot you need to install the externalcontrol-1.0.5.urcap. Download it from https://github.com/UniversalRobots/Universal_Robots_ExternalControl_URCap/releases and move it to an USB stick.
 
-## Step 2
-Open the terminal and Run:
+On the welcome screen select Setup Robot and then URCaps to enter the URCaps installation screen.
+
+
+## Extract calibration information
+
 ```
-unset LD_LIBRARY_PATH
-export FASTRTPS_DEFAULT_PROFILES_FILE=~/.ros/fastdds.xml
-export ROS_DOMAIN_ID=99
+source /opt/ros/humble/setup.bash
+ros2 launch ur_calibration calibration_correction.launch.py \
+robot_ip:=192.168.1.102 target_filename:="${HOME}/my_robot_calibration.yaml"
+
 ```
 
 Choose a domain ID(eg:99)
