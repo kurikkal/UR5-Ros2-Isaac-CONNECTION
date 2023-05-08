@@ -86,3 +86,34 @@ RViz will be launched with the robot depicting its current state. Try it with 'm
 ```
 ros2 launch ur_moveit_config ur_moveit.launch.py ur_type:=ur5 launch_rviz:=true
 ```
+
+# ROS2- Isaac Sim Connection
+
+## Step 1
+Move the 'fastdds.xml' file also located at the root of the ros2_workspace folder in Isaac Sim folder to '~/.ros/'
+
+## Step 2
+Open the terminal and Run:
+```
+unset LD_LIBRARY_PATH
+export FASTRTPS_DEFAULT_PROFILES_FILE=~/.ros/fastdds.xml
+export ROS_DOMAIN_ID=99
+```
+
+Choose a domain ID(eg:99)
+
+## Step 3
+Launch Isaac Sim
+
+IMP: Do not source ROS2 in the terminal running Isaac Sim. So do not add the command to source ROS2 and the command to set ROS2 Domain ID to ~/.bashrc file.
+
+## Step 4
+Open action graph. Search for ROS2 Context and drag it into the empty graph. Type the same domain ID you choose in the node. Edit the rest of the action graph according to the project.
+
+## Step 5
+ Go to the terminal in Step 3, Source ROS2 there:
+ ```
+ source /opt/ros/humble/setup.bash
+ 
+ ```
+ Now the bridge connection is established.
