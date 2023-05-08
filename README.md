@@ -164,3 +164,64 @@ Press the play button in Isaac Sim. The UR5 in isaac sim will move to the initia
 
 Go to the the 'Move' tab in teach pendant and move the robot. The robot in Isaac Sim should move accordingly.
 
+# Data from Isaac to UR5
+
+The method to control the robot using Isaac Sim is complex compared to the previous one. 
+We use the ROS2 Joint State Publisher node to publish the joint states of the UR5 in Isaac Sim. The real robot should subscribe to this data move accordingly.
+ros2_control is the framework that enables this operation.
+The ur_robot_driver uses the 'joint_trajectory_controller', 'scaled_joint_trajectory_controller', 'forward_velocity_controller', 'forward_position_controller'. We will use the forward_position_controller to control the positions of the joints. The data published from Isaac Sim and the data to be published to the forward_position_controller is of different format.
+So we will create a ROS2 Package to subscribe to Isaac Sim Published joint_state and publish as forward_position.
+
+```
+import rclpy
+from rclpy.node import Node
+from sensor_msgs.msg import JointState
+from std_msgs.msg import Float64MultiArray
+
+
+class JointController(Node):
+
+    def __init__(self):
+        super().__init__('isaac_joint_controller')
+        self.publisher = self.create_publisher(Float64MultiArray, '/forward_position_controller/commands', 10)
+
+        self.subscription = self.create_subscription(
+            JointState,
+            'joint_states_sim',
+            self.listener_callback,
+            10)
+
+        self.joint_states = {}
+        self.joint_names = [
+            "shoulder_pan_joint",
+            "shoulder_lift_joint",
+            "elbow_joint",
+            "wrist_1_joint",
+            "wrist_2_joint",
+            "wrist_3_joint",
+        ]
+
+    def listener_callback(self, msg:JointState):
+        for name, pose in zip(msg.name, msg.position):
+            self.joint_states[name] = pose
+        
+        out_msg = Float64MultiArray()
+         
+        for el in self.joint_names:
+            out_msg.data.append(self.joint_states[el])
+        
+        self.publisher.publish(out_msg)
+
+
+def main(args=None):
+    rclpy.init(args=args)
+    joint_controller = JointController()
+    rclpy.spin(joint_controller)
+    joint_controller.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
+ 
+```
