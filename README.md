@@ -1,7 +1,7 @@
 # UR5-Ros2-Isaac-CONNECTION
 Documentation for the connection between ur5 &lt;-> ros2 &lt;-> Isaac Sim
 
-#UR5-ROS2 Connection
+# UR5-ROS2 Connection
 
 ## Install necessary packages
 
@@ -60,8 +60,6 @@ The UR5 is ready for connection.
 ## Extract calibration information
 Each UR robot is calibrated inside the factory giving exact forward and inverse kinematics. To also make use of this in ROS, you first have to extract the calibration information from the robot.
 Though this step is not necessary to control the robot using this driver, it is highly recommended to do so, as otherwise endeffector positions might be off in the magnitude of centimeters.
-
-
 
 Verify the connection from the PC with e.g. ping.
 ```
