@@ -229,4 +229,47 @@ if __name__ == '__main__':
 ```
 
 ## Action Graph
+Open action graph
+Add the nodes as shown in the image to the graph and connect accordingly.
 ![image](https://github.com/kurikkal/UR5-Ros2-Isaac-CONNECTION/blob/main/Publish.png)
+Enter Target: /World/UR5
+topicName: joint_states_sim
+in joint_state_publisher node.
+
+Enter Domain Id: 99 in Context node.
+Press play button
+
+
+## Launch the UR Control
+Open a terminal, run all the commands mentioned in 'Step 2' and source ROS2.
+Run:
+
+```
+ros2 launch ur_robot_driver ur_control.launch.py ur_type:=ur5 robot_ip:=192.168.1.102 launch_rviz:=true
+```
+
+Rviz window will pop up.
+
+Open another terminal, run all the commands mentioned in 'Step 2' and source ROS2.
+Run:
+```
+ros2 topic list
+```
+
+A set of ROS2 topics will be shown. Ensure the topic  'joint_states_sim' is running.
+
+The forward_position_controller is usually disabled by default by ur_robot_driver.
+Check by running the command:
+```
+ ros2 control list_controllers
+```
+If inactive, activate it by running following command:
+
+```
+ros2 control switch_controllers --activate forward_position_controller --deactivate scaled_joint_trajectory_controller
+```
+
+Now run the Custom ROS2 Package
+
+## Start Simulation
+Move the robot in the Isaac Sim, the real robot should move accordingly.
