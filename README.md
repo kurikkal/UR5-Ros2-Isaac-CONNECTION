@@ -275,5 +275,5 @@ Now run the Custom ROS2 Package
 Move the robot in the Isaac Sim, the real robot should move accordingly.
 
 # Data from/to UR5 to/from Isaac- Control with feedback.
-
+Combining both Action Graphs in the above sections is the basic concept but it won't work properly because the articulation controller keeps controlling the the simulated UR5 continuously. Even though any movement applied to the simulated robot is reflected slightly, it is met with high resistance to go back to initial state. Another problems is , there is always some small value is being published by real UR5, this causes the simulated robot moves slightly which in turn moves the real robot and acts as a loop action. Need to be experimented more to solve these problems.
 
